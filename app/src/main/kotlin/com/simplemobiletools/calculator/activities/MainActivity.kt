@@ -141,7 +141,7 @@ class MainActivity : SimpleActivity(), Calculator {
         }
     }
 
-    private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)
+    private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9, btn_pi)
 
     private fun copyToClipboard(copyResult: Boolean): Boolean {
         var value = formula.value

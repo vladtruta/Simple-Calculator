@@ -3,6 +3,7 @@ package com.simplemobiletools.calculator.helpers
 import android.content.Context
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.operation.OperationFactory
+import kotlin.math.PI
 
 class CalculatorImpl(calculator: Calculator, val context: Context) {
     var displayedNumber: String? = null
@@ -75,12 +76,18 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
         setValue(newValue)
     }
 
+    fun addDigit(number: Double) {
+        val currentValue = displayedNumber
+        val newValue = formatString(currentValue!! + number)
+        setValue(newValue)
+    }
+
     private fun formatString(str: String): String {
         // if the number contains a decimal, do not try removing the leading zero anymore, nor add group separator
         // it would prevent writing values like 1.02
-        if (str.contains(".")) {
+        /*if (str.contains(".")) {
             return str
-        }
+        }*/
 
         val doubleValue = Formatter.stringToDouble(str)
         return Formatter.doubleToString(doubleValue)
@@ -270,6 +277,7 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
             R.id.btn_7 -> addDigit(7)
             R.id.btn_8 -> addDigit(8)
             R.id.btn_9 -> addDigit(9)
+            R.id.btn_pi -> addDigit(PI)
         }
     }
 }

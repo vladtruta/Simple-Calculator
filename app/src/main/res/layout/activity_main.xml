@@ -44,6 +44,14 @@
         tools:visibility="visible">
 
         <Button
+            android:id="@+id/btn_pi"
+            style="@style/MyButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="π" />
+
+        <Button
             android:id="@+id/btn_cos"
             style="@style/MyButton"
             android:layout_width="match_parent"
