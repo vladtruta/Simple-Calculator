@@ -3,6 +3,7 @@ package com.simplemobiletools.calculator.helpers
 import android.content.Context
 import com.simplemobiletools.calculator.R
 import com.simplemobiletools.calculator.operation.OperationFactory
+import kotlin.math.E
 import kotlin.math.PI
 
 class CalculatorImpl(calculator: Calculator, val context: Context) {
@@ -80,7 +81,7 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
         val currentValue = displayedNumber
         var newValue = formatString(currentValue!! + number)
 
-        if (number == PI) {
+        if (number == PI || number == E) {
             // Remove "0" in front of "03.14159..."
             newValue = newValue.substring(1)
         }
@@ -167,6 +168,10 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
         mResetValue = true
         lastKey = operation
         mLastOperation = operation
+
+        if (displayedNumber == "∞" || displayedNumber == "-∞") {
+            return
+        }
 
         when (operation) {
             ROOT -> handleRoot()
@@ -266,6 +271,7 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
             R.id.btn_8 -> addDigit(8)
             R.id.btn_9 -> addDigit(9)
             R.id.btn_pi -> addDigit(PI)
+            R.id.btn_e -> addDigit(E)
         }
     }
 }
