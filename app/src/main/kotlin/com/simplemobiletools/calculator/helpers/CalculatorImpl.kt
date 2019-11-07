@@ -109,6 +109,26 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
         calculateResult()
     }
 
+    private fun handleSin() {
+        mBaseValue = getDisplayedNumberAsDouble()
+        calculateResult()
+    }
+
+    private fun handleCos() {
+        mBaseValue = getDisplayedNumberAsDouble()
+        calculateResult()
+    }
+
+    private fun handleTan() {
+        mBaseValue = getDisplayedNumberAsDouble()
+        calculateResult()
+    }
+
+    private fun handleLn() {
+        mBaseValue = getDisplayedNumberAsDouble()
+        calculateResult()
+    }
+
     private fun calculateResult() {
         updateFormula()
         if (mWasPercentLast) {
@@ -125,7 +145,9 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
 
     fun handleOperation(operation: String) {
         mWasPercentLast = operation == PERCENT
-        if (lastKey == DIGIT && operation != ROOT && operation != FACTORIAL) {
+        if (lastKey == DIGIT && operation != ROOT && operation != FACTORIAL
+                && operation != SIN && operation != COS && operation != TAN
+                && operation != LN) {
             handleResult()
         }
 
@@ -133,13 +155,31 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
         lastKey = operation
         mLastOperation = operation
 
-        if (operation == ROOT) {
-            handleRoot()
-            mResetValue = false
-        }
-        if (operation == FACTORIAL) {
-            handleFactorial()
-            mResetValue = false
+        when(operation) {
+            ROOT -> {
+                handleRoot()
+                mResetValue = false
+            }
+            FACTORIAL -> {
+                handleFactorial()
+                mResetValue = false
+            }
+            SIN -> {
+                handleSin()
+                mResetValue = false
+            }
+            COS -> {
+                handleCos()
+                mResetValue = false
+            }
+            TAN -> {
+                handleTan()
+                mResetValue = false
+            }
+            LN -> {
+                handleLn()
+                mResetValue = false
+            }
         }
     }
 

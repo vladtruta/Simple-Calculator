@@ -15,6 +15,10 @@ object OperationFactory {
             POWER -> PowerOperation(baseValue, secondValue)
             ROOT -> RootOperation(baseValue)
             FACTORIAL -> FactorialOperation(baseValue)
+            SIN -> SinOperation(baseValue)
+            COS -> CosOperation(baseValue)
+            TAN -> TanOperation(baseValue)
+            LN -> LnOperation(baseValue)
             else -> null
         }
     }

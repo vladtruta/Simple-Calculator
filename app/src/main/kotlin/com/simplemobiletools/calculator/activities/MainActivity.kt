@@ -41,6 +41,11 @@ class MainActivity : SimpleActivity(), Calculator {
         btn_percent.setOnClickListener { calc.handleOperation(PERCENT); checkHaptic(it) }
         btn_power.setOnClickListener { calc.handleOperation(POWER); checkHaptic(it) }
         btn_root.setOnClickListener { calc.handleOperation(ROOT); checkHaptic(it) }
+        btn_sin.setOnClickListener { calc.handleOperation(SIN); checkHaptic(it) }
+        btn_cos.setOnClickListener { calc.handleOperation(COS); checkHaptic(it) }
+        btn_tan.setOnClickListener { calc.handleOperation(TAN); checkHaptic(it) }
+        btn_ln.setOnClickListener { calc.handleOperation(LN); checkHaptic(it) }
+        btn_factorial.setOnClickListener { calc.handleOperation(FACTORIAL); checkHaptic(it) }
 
         btn_clear.setOnClickListener { calc.handleClear(); checkHaptic(it) }
         btn_clear.setOnLongClickListener { calc.handleReset(); true }
@@ -84,7 +89,7 @@ class MainActivity : SimpleActivity(), Calculator {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        menu.findItem(R.id.scientific_calculator).isVisible = false // not implemented yet
+        //menu.findItem(R.id.scientific_calculator).isVisible = true // not implemented yet
         return true
     }
 
@@ -92,7 +97,7 @@ class MainActivity : SimpleActivity(), Calculator {
         when (item.itemId) {
             R.id.settings -> launchSettings()
             R.id.about -> launchAbout()
-            R.id.scientific_calculator -> launchScientific()
+            R.id.scientific -> toggleScientific()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -114,10 +119,6 @@ class MainActivity : SimpleActivity(), Calculator {
         startActivity(Intent(applicationContext, SettingsActivity::class.java))
     }
 
-    private fun launchScientific() {
-        startActivity(Intent(applicationContext, ScientificActivity::class.java))
-    }
-
     private fun launchAbout() {
         val licenses = LICENSE_AUTOFITTEXTVIEW or LICENSE_ROBOLECTRIC or LICENSE_ESPRESSO
 
@@ -130,6 +131,14 @@ class MainActivity : SimpleActivity(), Calculator {
         )
 
         startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
+    }
+
+    private fun toggleScientific() {
+        if (scientific_row.visibility == View.VISIBLE) {
+            scientific_row.visibility = View.GONE
+        } else {
+            scientific_row.visibility = View.VISIBLE
+        }
     }
 
     private fun getButtonIds() = arrayOf(btn_decimal, btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9)

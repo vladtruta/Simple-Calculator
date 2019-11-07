@@ -25,3 +25,8 @@ const val SIX = "six"
 const val SEVEN = "seven"
 const val EIGHT = "eight"
 const val NINE = "nine"
+
+const val SIN = "sin"
+const val COS = "cos"
+const val TAN = "tan"
+const val LN = "ln"
