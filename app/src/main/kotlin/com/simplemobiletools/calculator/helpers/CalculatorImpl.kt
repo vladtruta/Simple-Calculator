@@ -78,16 +78,22 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
 
     fun addDigit(number: Double) {
         val currentValue = displayedNumber
-        val newValue = formatString(currentValue!! + number)
+        var newValue = formatString(currentValue!! + number)
+
+        if (number == PI) {
+            // Remove "0" in front of "03.14159..."
+            newValue = newValue.substring(1)
+        }
+
         setValue(newValue)
     }
 
     private fun formatString(str: String): String {
         // if the number contains a decimal, do not try removing the leading zero anymore, nor add group separator
         // it would prevent writing values like 1.02
-        /*if (str.contains(".")) {
+        if (str.contains(".")) {
             return str
-        }*/
+        }
 
         val doubleValue = Formatter.stringToDouble(str)
         return Formatter.doubleToString(doubleValue)
@@ -162,31 +168,13 @@ class CalculatorImpl(calculator: Calculator, val context: Context) {
         lastKey = operation
         mLastOperation = operation
 
-        when(operation) {
-            ROOT -> {
-                handleRoot()
-                mResetValue = false
-            }
-            FACTORIAL -> {
-                handleFactorial()
-                mResetValue = false
-            }
-            SIN -> {
-                handleSin()
-                mResetValue = false
-            }
-            COS -> {
-                handleCos()
-                mResetValue = false
-            }
-            TAN -> {
-                handleTan()
-                mResetValue = false
-            }
-            LN -> {
-                handleLn()
-                mResetValue = false
-            }
+        when (operation) {
+            ROOT -> handleRoot()
+            FACTORIAL -> handleFactorial()
+            SIN -> handleSin()
+            COS -> handleCos()
+            TAN -> handleTan()
+            LN -> handleLn()
         }
     }
 
